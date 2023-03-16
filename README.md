@@ -34,8 +34,13 @@
 3. 그리고 window.ethereum 을 (window as any).ethereum 으로 변경한다.
 
 
+# List.tsx 생성
+- nft.json의 name, description, image 사용
+
+
 # 실행
-- front/yarn start
+- front/ yarn start
+- back/ npm run start:dev
 
 
 # 오늘 내일 다룰 내용
@@ -43,12 +48,61 @@
 - 2023. 3. 16. Mint | List
 
 ## API Server
-- 2023. 3. 16. 
+- 2023. 3. 16. Mint | List
+
+
+## Pinata(IPFS)
+- 2023. 3. 16. Mint | List
+1. back에 라이브러리 설치
+npm i @pinata/sdk
+2. index.ts import
+import pinataSDK from '@pinata/sdk';
+3. config() 아래에
+const pinata = new pinataSDK(process.env.API_KEY, process.env.API_Secret);
+4. 피냐타 로그인 api 키 새로 만듬 admin, 이름적기 , create -> copy all
+API_KEY = xxxxxxx
+API_SECRET = xxxxxxxxxxxxxxxx
+5. back 폴더 내부에 .env 생성 후 위 api key,secret 저장
+6. mint 클릭시 api 내용 추가
+    const imgResult = await pinata.pinFileToIPFS(Readable.from(req.file.buffer), {
+        pinataMetadata: {
+            name: Date.now().toString(),
+        },
+        pinataOptions: {
+            cidVersion: 0,
+        }
+    });
+    console.log(imgResult);
+7. 확인
+- server의 console.log -> IpfsHash : QmaKThD44ymQcQZYNrdpAuBqHEBkyC1WtL9aoQxsTfYkje
+- pinata에서 QmaKThD44ymQcQZYNrdpAuBqHEBkyC1WtL9aoQxsTfYkje CID 파일 확인 가능
+8. 그리고 isDuplicate 를 방지(?) 하기 위하여 변수의 타입을 정의하도록 바꿔준다.
+    const imgResult: {
+        IpfsHash: string;
+        PinSize: number;
+        Timestamp: string;
+        isDuplicate?: boolean;
+    } = await pinata.pinFileToIPFS(Readable.from(req.file.buffer), {
+        pinataMetadata: {
+            name: Date.now().toString(),
+        },
+        pinataOptions: {
+            cidVersion: 0,
+        }
+    });
+    console.log(imgResult);
+    if(imgResult.isDuplicate){
+        console.log("같은 이미지!");
+    }
+9. 해당 타입을 interface로 빼 주고 싶다면 어떻게?
+
+10. json 형식으로 nft data를 pinata에 올린다.
+
+
+
+
 
 
 ## Solidity
-## Pinata(IPFS)
+- 2023. 3. 17. Mint | List
 
-
-# List.tsx 생성
-- nft.json의 name, description, image 사용
