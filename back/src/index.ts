@@ -18,7 +18,6 @@ const upload = multer();
 
 // 현재 배포된 NFT 이미지를 94일차의 nft.json에서 가져옴
 app.get("/api/list", (req: Request, res: Response) => {
-    console.log("아녕");
     const array = [
         {
             "name": "Tree-001",

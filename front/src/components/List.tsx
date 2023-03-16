@@ -17,7 +17,6 @@ export const List = () => {
 
     useEffect(() => {
         (async () => {
-            console.log("111");
             setList((await axios.get("http://localhost:8080/api/list", {})).data);
         })();
     }, []);
