@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 interface NFTData {
     name: string;
@@ -7,18 +8,23 @@ interface NFTData {
 }
 
 
+
+
 export const List = () => {
 
-    // 배포된 NFT 이미지를 94일차의 nft.json에서 가져옴
-    const [list, setList] = useState<Array<NFTData>>([{
-        "name": "Tree-001",
-        "description": "testing NFT with Pinata",
-        "image": "https://gateway.pinata.cloud/ipfs/QmV87DvjvfPnTN6g8sNBAHYXJjqGWzo2Ex4KqFTqdA1aZm",
-    }]);
+    // API Server에서 리스트 받아서 출력하자.
+    const [list, setList] = useState<Array<NFTData>>([]);
+
+    useEffect(() => {
+        (async () => {
+            console.log("111");
+            setList((await axios.get("http://localhost:8080/api/list", {})).data);
+        })();
+    }, []);
 
     return (
         <ul>
-            {list.map((item, idx) =>
+            {list?.map((item, idx) =>
                 <Item item={item} key={`item-${idx}`} />
             )}
         </ul>
