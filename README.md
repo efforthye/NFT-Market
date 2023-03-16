@@ -45,3 +45,5 @@
 - Pinata(IPFS)
 
 
+# List.tsx 생성
+- nft.json의 name, description, image 사용
