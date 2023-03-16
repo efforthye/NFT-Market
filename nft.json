@@ -1,0 +1,15 @@
+{
+    "name": "Tree-001",
+    "description": "testing NFT with Pinata",
+    "image": "https://gateway.pinata.cloud/ipfs/QmV87DvjvfPnTN6g8sNBAHYXJjqGWzo2Ex4KqFTqdA1aZm",
+    "attributes": [
+        {
+            "trait_type": "Rank",
+            "value": 1
+        },
+        {
+            "trait_type": "Type",
+            "value": 1
+        }
+    ]
+}

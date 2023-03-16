@@ -36,3 +36,12 @@
 
 # 실행
 - front/yarn start
+
+
+# 오늘 내일 다룰 내용
+- Front
+- API Server
+- Solidity
+- Pinata(IPFS)
+
+

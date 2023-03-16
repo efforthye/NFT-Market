@@ -1,3 +1,4 @@
+import { List } from './components/List';
 import { Mint } from './components/Mint';
 import { useWeb3 } from './modules/useWeb3';
 
@@ -26,6 +27,7 @@ function App() {
             )
         }
       </div>
+      <List />
     </div>
   );
 }
