@@ -34,7 +34,7 @@ export const Mint = ({ account }: { account: string }) => {
     }, []);
 
     const mint = async () => {
-        if (!NFTName || !NFTDescription || !file) return;
+        if (!NFTName || !NFTDescription || !file || !account) return;
         const formData = new FormData();
         formData.append('file', file);
         formData.append('name', NFTName);
