@@ -4,18 +4,18 @@ import { useWeb3 } from './modules/useWeb3';
 
 function App() {
 
-  const { account, chainId, logIn } = useWeb3();
+  const { account, chainId, logIn, web3 } = useWeb3();
 
   return (
     <div>
       <div>
         {
-          account ?
+          account && web3 ?
             (
               <div>
                 <div>ChainId : {chainId}</div>
                 <div>Account : {account}</div>
-                <Mint account={account} />
+                <Mint account={account} web3={web3} />
               </div>
             ) :
             (

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import Web3 from 'web3';
 
-
-export const Mint = ({ account }: { account: string }) => {
+export const Mint = ({ account, web3 }: { account: string; web3: Web3 }) => {
 
     const [NFTName, setNFTName] = useState<string>("");
     const [NFTDescription, setNFTDescription] = useState<string>("");
@@ -43,7 +43,17 @@ export const Mint = ({ account }: { account: string }) => {
         const result = (
             await axios.post("http://localhost:8080/api/mint", formData)
         ).data;
+
         console.log(result);
+        // 이제 해당 객체 데이터(sendTransaction)를 가지고 transaction을 보내 NFT 등록을 한다.?
+        // SaleToken.sol  // 리스트를 만들어서
+        // balanceOf : 가진 토큰(NFT) 개수
+        // 어떻게 NFT 등록하더라
+        // balanceOf 보내보면 민팅되면 1됨
+        // Mint, safeMint
+
+        // 스마트 컨트랙트를 보낸 사람과 같아야 한다고 함
+        web3.eth.sendTransaction(result);
     }
 
 

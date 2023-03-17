@@ -45,6 +45,7 @@ app.get("/api/list", (req: Request, res: Response) => {
     res.send(array);
 });
 
+
 // upload.single('file') <- (중요)
 app.post("/api/mint", upload.single('file'), async (req: Request, res: Response) => {
     const { name, description }: { name: string; description: string } = req.body;
