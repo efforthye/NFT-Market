@@ -2,7 +2,7 @@ import axios from "axios";
 import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 
 
-export const Mint = () => {
+export const Mint = ({ account }: { account: string }) => {
 
     const [NFTName, setNFTName] = useState<string>("");
     const [NFTDescription, setNFTDescription] = useState<string>("");
@@ -36,11 +36,10 @@ export const Mint = () => {
     const mint = async () => {
         if (!NFTName || !NFTDescription || !file) return;
         const formData = new FormData();
-        if (file) {
-            formData.append('file', file);
-        }
+        formData.append('file', file);
         formData.append('name', NFTName);
         formData.append('description', NFTDescription);
+        formData.append('from', account);
         const result = (
             await axios.post("http://localhost:8080/api/mint", formData)
         ).data;

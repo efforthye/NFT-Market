@@ -15,7 +15,7 @@ function App() {
               <div>
                 <div>ChainId : {chainId}</div>
                 <div>Account : {account}</div>
-                <Mint />
+                <Mint account={account} />
               </div>
             ) :
             (

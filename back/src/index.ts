@@ -4,10 +4,18 @@ import multer from 'multer';
 import cors from 'cors';
 import { Readable } from 'stream';
 import pinataSDK from '@pinata/sdk';
+import Web3 from 'web3';
+import axios from 'axios';
+import { AbiItem } from 'web3-utils';
+import { abi as NFTAbi } from '../contracts/artifacts/NFTToken.json';
+import { abi as SaleAbi } from '../contracts/artifacts/SaleToken.json';
 
 const app: Express = express();
 
 dotenv.config();
+
+const web3 = new Web3("http://ganache.test.errorcode.help:8545");
+// const web3 = new Web3("http://localhost:8545"); // 로컬 Ganache
 
 const pinata = new pinataSDK(process.env.API_KEY, process.env.API_Secret);
 
@@ -77,7 +85,19 @@ app.post("/api/mint", upload.single('file'), async (req: Request, res: Response)
     });
     console.log(jsonResult);
 
-    res.send("mint complete");
+    const deployed = new web3.eth.Contract(NFTAbi as AbiItem[], process.env.NFT_TOKEN_CA);
+
+    const obj: { nonce: number; to: string; from: string; data: string } = {
+        nonce: 0,
+        to: process.env.NFT_TOKEN_CA,
+        from: req.body.from,
+        data: "",
+    }
+    obj.nonce = await web3.eth.getTransactionCount(req.body.from);
+    obj.data = deployed.methods.safeMint(jsonResult.IpfsHash).encodeABI();
+
+    res.send(obj);
+    // res.send("mint complete");
 });
 
 app.listen(8080, () => {

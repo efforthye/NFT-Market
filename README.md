@@ -13,7 +13,7 @@
 2. back
     ```bash
     npm init -y
-    npm i express dotenv @openzeppelin/contracts @remix-project/remixd cors multer
+    npm i express dotenv @openzeppelin/contracts @remix-project/remixd cors multer web3 axios web3-utils
     npm i -D @types/node nodemon @types/express @types/multer prettier-plugin-solidity tsconfig-paths
     ```
 
