@@ -87,7 +87,7 @@ contract SaleToken {
         uint balance = Token.balanceOf(_tokenOwner);
         require(balance > 0);
 
-        TokenInfo[] memory list = new TokenInfo[](SaleTokenList.length);
+        TokenInfo[] memory list = new TokenInfo[](balance);
 
         for (uint i = 0; i < balance; i++) {
             uint tokenId = Token.tokenOfOwnerByIndex(_tokenOwner, i);

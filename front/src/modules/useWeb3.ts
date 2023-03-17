@@ -27,6 +27,17 @@ export const useWeb3 = (): {
                 if (_account) {
                     setAccount(_account);
                 }
+
+                window.ethereum?.on('accountsChanged', async () => {
+                    if (window.ethereum) {
+                        const [_account] = (await window.ethereum.request({
+                            method: 'eth_requestAccounts',
+                        })) as Array<string>;
+                        setAccount(_account);
+                    }
+                });
+
+
                 setChainId((window as any).ethereum.networkVersion);
 
             } else {

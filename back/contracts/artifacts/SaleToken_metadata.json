@@ -250,11 +250,11 @@
 			]
 		},
 		"contracts/SaleToken.sol": {
-			"keccak256": "0x054f049b696057c2a833c9bd41ea7efea0b6b7292f5e2710c9a4acc604fbdf90",
+			"keccak256": "0xf404b527b13241eaf54c631b2732b8814f832dbcd325cb42693af57161b8df0d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7be7e144567f5a978204966033d4bc628871da3dc7b05fb36f2005aacae1e679",
-				"dweb:/ipfs/QmcCZe2yXh3Aj2QKFuCbN2okRGMbLBEaWMoCo9YbPyWM3U"
+				"bzz-raw://43e4fe9e46ab54f24c844e9a6e072232b91156e1dd355524b7e4f60ac9407a8c",
+				"dweb:/ipfs/QmWKNGGgdTUZTNhiGq5VGPauwNFzE2wdfwMgRStK77WieC"
 			]
 		},
 		"node_modules/@openzeppelin/contracts/access/Ownable.sol": {

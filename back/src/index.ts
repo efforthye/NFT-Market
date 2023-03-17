@@ -15,12 +15,10 @@ const app: Express = express();
 dotenv.config();
 
 const web3 = new Web3("http://ganache.test.errorcode.help:8545");
-// const web3 = new Web3("http://localhost:8545"); // 로컬 Ganache
 
 const pinata = new pinataSDK(process.env.API_KEY, process.env.API_Secret);
 
 
-// credentials : 쿠키 허락
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,20 +27,43 @@ app.use(express.urlencoded({ extended: false }));
 const upload = multer();
 
 // 현재 배포된 NFT 이미지를 94일차의 nft.json에서 가져옴
-app.get("/api/list", (req: Request, res: Response) => {
-    const array = [
-        {
-            "name": "Tree-001",
-            "description": "testing NFT with Pinata",
-            "image": "https://gateway.pinata.cloud/ipfs/QmV87DvjvfPnTN6g8sNBAHYXJjqGWzo2Ex4KqFTqdA1aZm",
-        },
-        {
-            "name": "Tree-002",
-            "description": "testing NFT with Pinata",
-            "image": "https://gateway.pinata.cloud/ipfs/QmV87DvjvfPnTN6g8sNBAHYXJjqGWzo2Ex4KqFTqdA1aZm",
-        },
-    ]
-    res.send(array);
+app.post("/api/list", async (req: Request, res: Response) => {
+
+    const deployed = new web3.eth.Contract(SaleAbi as AbiItem[], process.env.SALE_TOKEN_CA);
+
+    let data: Array<{ [key: string]: string }> = [];
+
+    if (req.body.from) {
+
+    } else {
+
+        try {
+            // const tempArr = await deployed.methods.getOwnerTokens(req.body.from).call();
+            const tempArr = await deployed.methods.getSaleTokenList().call();
+            for (let i = 0; i < tempArr.length; i++) {
+                try {
+                    const { name, description, image } = (
+                        await axios.get(tempArr[i].tokenURI) //.replace("gateway.pinata.cloud", "ipfs.io")
+                    ).data;
+
+                    data.push({
+                        tokenId: tempArr[i].tokenId,
+                        price: tempArr[i].price,
+                        name,
+                        description,
+                        image
+                    });
+                } catch (error) {
+                    // console.error(error);
+                }
+            }
+        } catch (error) {
+            // console.error(error);
+        }
+    }
+
+
+    res.send(data);
 });
 
 

@@ -27,7 +27,7 @@ function App() {
             )
         }
       </div>
-      <List />
+      <List account={account} />
     </div>
   );
 }
