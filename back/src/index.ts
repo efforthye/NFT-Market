@@ -43,7 +43,10 @@ app.post("/api/list", async (req: Request, res: Response) => {
             for (let i = 0; i < tempArr.length; i++) {
                 try {
                     const { name, description, image } = (
-                        await axios.get(tempArr[i].tokenURI) //.replace("gateway.pinata.cloud", "ipfs.io")
+                        await axios.get(tempArr[i].tokenURI.replace(
+                            "gateway.pinata.cloud",
+                            "block7.mypinata.cloud"
+                        ))
                     ).data;
 
                     data.push({
@@ -51,7 +54,10 @@ app.post("/api/list", async (req: Request, res: Response) => {
                         price: tempArr[i].price,
                         name,
                         description,
-                        image
+                        image: image.replace(
+                            "gateway.pinata.cloud",
+                            "block7.mypinata.cloud"
+                        )
                     });
                 } catch (error) {
                     // console.error(error);
