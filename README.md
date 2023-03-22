@@ -6,7 +6,7 @@
     ```
 1. front
     ```bash
-    yarn create react-app front --template typescript 
+    yarn create react-app front --template typescript
     cd front
     yarn add web3 axios @metamask/providers
     ```
@@ -20,7 +20,7 @@
 # window.ethereum 이 불러와 지지 않는 오류 해결
 1. front에 해당 라이브러리를 다운받는다.
     ```bash
-    yarn add @metamask/providers 
+    yarn add @metamask/providers
     ```
 2. 이후 front/src/react-app-env.d.ts 에 아래 코드 추가
     ```ts
