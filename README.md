@@ -143,3 +143,4 @@
 ## Solidity
 - 2023. 3. 17. Mint | List
 - 피냐타에 올린 내용을 Contract에 올릴 예정
+ 
